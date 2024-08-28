@@ -16,37 +16,37 @@ public class ValidSudoku {
 	}
 
 	public boolean isValidSudoku(char[][] board) {
-		//arrays of sets to track characters in rows, columns and squares
+		// arrays of sets to track characters in rows, columns and squares
 		Set<Character>[] rowSets = new HashSet[9];
 		Set<Character>[] colSets = new HashSet[9];
 		Set<Character>[] squareSets = new HashSet[9];
-		
-		//initialize the sets
-		for (int i = 0; i<9; i++) {
+
+		// initialize the sets
+		for (int i = 0; i < 9; i++) {
 			rowSets[i] = new HashSet<>();
 			colSets[i] = new HashSet<>();
 			squareSets[i] = new HashSet<>();
 		}
-		
-		//iterate through the board
-		for (int i = 0; i<board.length; i++) {
-			for (int j = 0; j<board[i].length; j++) {
+
+		// iterate through the board
+		for (int i = 0; i < board.length; i++) {
+			for (int j = 0; j < board[i].length; j++) {
 				char curChar = board[i][j];
-				if (curChar == '.') continue;
-				
-				int squareKey = (i/3)*3 + (j/3);
-				
-				//check for duplicated in row, col or square set
-				if ( rowSets[i].contains(curChar) ||
-						colSets[j].contains(curChar) ||
-						squareSets[squareKey].contains(curChar)) {
+				if (curChar == '.')
+					continue;
+
+				int squareKey = (i / 3) * 3 + (j / 3);
+
+				// check for duplicated in row, col or square set
+				if (rowSets[i].contains(curChar) || colSets[j].contains(curChar)
+						|| squareSets[squareKey].contains(curChar)) {
 					return false;
 				} else {
 					rowSets[i].add(curChar);
 					colSets[j].add(curChar);
 					squareSets[squareKey].add(curChar);
 				}
-				
+
 			}
 		}
 		return true;
